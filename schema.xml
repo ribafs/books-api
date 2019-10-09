@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="my_books_library" defaultIdMethod="native" defaultPhpNamingMethod="underscore" namespace="PropelModels">
+  <table name="authors" idMethod="native" phpName="Authors">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="firstname" phpName="Firstname" type="VARCHAR" size="500" required="true" defaultValue=""/>
+    <column name="lastname" phpName="Lastname" type="VARCHAR" size="500" required="true" defaultValue=""/>
+    <unique name="id">
+      <unique-column name="id"/>
+    </unique>
+    <unique name="unique_index_authors">
+      <unique-column name="firstname"/>
+      <unique-column name="lastname"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="books" idMethod="native" phpName="Books">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="title" phpName="Title" type="VARCHAR" size="500" required="true" defaultValue=""/>
+    <column name="year" phpName="Year" type="INTEGER" required="true" defaultValue="1970"/>
+    <unique name="id">
+      <unique-column name="id"/>
+    </unique>
+    <unique name="unique_index_books">
+      <unique-column name="id"/>
+      <unique-column name="title"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="books_by_authors" idMethod="native" phpName="BooksByAuthors">
+    <column name="id_book" phpName="IdBook" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="id_author" phpName="IdAuthor" type="INTEGER" primaryKey="true" required="true"/>
+    <foreign-key foreignTable="books" name="FK_D979F48D40C5BF33">
+      <reference local="id_book" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="authors" name="FK_D979F48D9B986D25">
+      <reference local="id_author" foreign="id"/>
+    </foreign-key>
+    <index name="FK_D979F48D40C5BF33">
+      <index-column name="id_book"/>
+    </index>
+    <index name="FK_D979F48D9B986D25">
+      <index-column name="id_author"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="books_by_categories" idMethod="native" phpName="BooksByCategories">
+    <column name="id_book" phpName="IdBook" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="id_category" phpName="IdCategory" type="INTEGER" primaryKey="true" required="true"/>
+    <foreign-key foreignTable="books" name="FK_81B4E74940C5BF33">
+      <reference local="id_book" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="categories" name="FK_81B4E7495697F554">
+      <reference local="id_category" foreign="id"/>
+    </foreign-key>
+    <index name="FK_81B4E74940C5BF33">
+      <index-column name="id_book"/>
+    </index>
+    <index name="FK_81B4E7495697F554">
+      <index-column name="id_category"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="books_by_user" idMethod="native" phpName="BooksByUser">
+    <column name="id_book" phpName="IdBook" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" primaryKey="true" required="true"/>
+    <foreign-key foreignTable="books" name="books_by_user_ibfk_1" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="id_book" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="user" name="books_by_user_ibfk_2" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="id_book">
+      <index-column name="id_book"/>
+    </index>
+    <index name="id_user">
+      <index-column name="id_user"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="categories" idMethod="native" phpName="Categories">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="category" phpName="Category" type="VARCHAR" size="250" required="true" defaultValue=""/>
+    <unique name="id">
+      <unique-column name="id"/>
+    </unique>
+    <unique name="unique_index_categories">
+      <unique-column name="id"/>
+      <unique-column name="category"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="user" idMethod="native" phpName="User">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="username" phpName="Username" type="VARCHAR" size="250" required="true" defaultValue=""/>
+    <unique name="id">
+      <unique-column name="id"/>
+    </unique>
+    <unique name="unique_index_user">
+      <unique-column name="username"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>
