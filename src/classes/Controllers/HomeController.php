@@ -40,7 +40,7 @@ if(!class_exists('HomeController'))
          * @author G.Maccario <g_maccario@hotmail.com>
          * @return
          */
-        public function __invoke(Request $request, Response $response, array $args)
+        public function __invoke(Request $request, Response $response, array $args) : \Slim\Http\Response
         {
             return $this->container->renderer->render($response, "index.php", array());
         }

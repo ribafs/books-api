@@ -16,6 +16,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 use PropelModels\BooksQuery;
 use PropelModels\AuthorsQuery;
+use Propel\Runtime\Collection\ObjectCollection;
 
 if(!class_exists('BooksListController'))
 {
@@ -34,7 +35,7 @@ if(!class_exists('BooksListController'))
          * @author G.Maccario <g_maccario@hotmail.com>
          * @return
          */
-        private function getBooks(int $year = null)
+        private function getBooks(int $year = null) : ObjectCollection
         {
             if(!$year)
             {
@@ -55,7 +56,7 @@ if(!class_exists('BooksListController'))
          * @author G.Maccario <g_maccario@hotmail.com>
          * @return
          */
-        public function __invoke(Request $request, Response $response, array $args)
+        public function __invoke(Request $request, Response $response, array $args) : \Slim\Http\Response
         {
             // Initial variable
             $data = array();

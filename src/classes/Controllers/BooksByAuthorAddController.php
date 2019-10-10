@@ -35,7 +35,7 @@ if(!class_exists('BooksByAuthorAddController'))
          * @author G.Maccario <g_maccario@hotmail.com>
          * @return
          */
-        public function __invoke(Request $request, Response $response, array $args)
+        public function __invoke(Request $request, Response $response, array $args) : \Slim\Http\Response
         {
             // Get all POST parameters
             $allPostPutVars = $request->getParsedBody();
